@@ -1,4 +1,5 @@
 import { GetStaticPaths, GetStaticProps } from 'next'
+import { useRouter } from 'next/router'
 import Image from 'next/future/image'
 import Stripe from 'stripe'
 import { stripe } from '../../lib/stripe'
@@ -19,6 +20,13 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
+  // alternativa mais recomendada
+  const { isFallback } = useRouter()
+
+  if (isFallback) {
+    return <p>Loading...</p>
+  }
+
   return (
     <ProductContainer>
       <ImageContainer>
@@ -38,15 +46,25 @@ export default function Product({ product }: ProductProps) {
 }
 
 export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
+  // Alternativas:
+  // 1. fallback: true
+  // Buscar os produtos mais vendidos ou acessados e gerar por SSG
+  // 2. fallback: 'blocking'
+  // Bloquear até que a página esteja pronta
+
   return {
     paths: [
       {
         params: {
           id: 'prod_MQxTDnXWkf5tzC'
-        }
+        },
       },
     ],
-    fallback: false,
+    // fallback
+    // false => dará 404
+    // true => tentará pegar o id e executar o getStaticProps e gerar a versão estática
+    // 'blocking' => bloqueará a página até que a renderização seja finalizada
+    fallback: true,
   }
 }
 
