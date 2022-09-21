@@ -34,7 +34,7 @@ export default function Success({ customerName, product }: SuccessProps) {
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({ query }) => {
+export const getServerSideProps: GetServerSideProps<SuccessProps> = async ({ query }) => {
   if (!query.session_id) {
     return {
       redirect: {
@@ -60,6 +60,6 @@ export const getServerSideProps: GetServerSideProps = async ({ query }) => {
         name: product.name,
         imageUrl: product.images[0],
       },
-    }
+    },
   }
 }
