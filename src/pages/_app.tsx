@@ -1,6 +1,7 @@
 import { AppProps } from 'next/app'
 import Image from 'next/future/image'
 import { Handbag } from 'phosphor-react'
+import { SideCart } from '../components/SideCart'
 import logoImg from '../assets/logo.svg'
 import { globalStyles } from '../styles/global'
 import { Button, Container, Header } from '../styles/pages/app'
@@ -27,6 +28,8 @@ export default function App({ Component, pageProps }: AppProps) {
       </Header>
 
       <Component {...pageProps} />
+
+      {/* <SideCart /> */}
     </Container>
   )
 }
