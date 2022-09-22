@@ -24,6 +24,7 @@ export const Button = styled('button', {
   border: 'none',
   borderRadius: '6px',
   position: 'relative',
+  cursor: 'pointer',
 
   svg: {
     color: '$gray500',

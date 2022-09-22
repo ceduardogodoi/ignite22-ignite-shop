@@ -7,7 +7,7 @@ import { Button, Container, Header } from '../styles/pages/app'
 
 globalStyles()
 
-const items = []
+const items = [1]
 
 export default function App({ Component, pageProps }: AppProps) {
   return (

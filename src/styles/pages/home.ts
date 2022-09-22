@@ -17,6 +17,7 @@ export const Product = styled('div', {
   alignItems: 'center',
   justifyContent: 'center',
   overflow: 'hidden',
+  minWidth: '696px !important',
 
   img: {
     objectFit: 'cover',
@@ -27,19 +28,24 @@ export const Product = styled('div', {
     bottom: '0.25rem',
     left: '0.25rem',
     right: '0.25rem',
-    padding: '2rem',
+    padding: '1.25rem',
     borderRadius: 6,
     display: 'flex',
-    alignItems: 'center',
     justifyContent: 'space-between',
-    backgroundColor: 'rgba(0, 0, 0, 0.6)',
+    backgroundColor: '$gray800',
     transform: 'translateY(110%)',
     opacity: 0,
     transition: 'all 0.2s ease-in-out',
 
+    div: {
+      display: 'flex',
+      flexDirection: 'column',
+      rowGap: '0.5rem',
+    },
+
     strong: {
       fontSize: '$lg',
-      color: '$gray100'
+      color: '$gray100',
     },
 
     span: {
@@ -55,4 +61,13 @@ export const Product = styled('div', {
       opacity: 1,
     }
   },
+})
+
+export const Button = styled('button', {
+  padding: '0.75rem',
+  backgroundColor: '$green500',
+  border: 'none',
+  borderRadius: '6px',
+  position: 'relative',
+  cursor: 'pointer',
 })
