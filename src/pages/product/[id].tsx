@@ -32,6 +32,8 @@ export default function Product({ product }: ProductProps) {
     return <p>Loading...</p>
   }
 
+  const title = `${product.name} | Ignite Shop`
+
   async function handleBuyProduct() {
     try {
       setIsCreatingCheckoutSession(true)
@@ -52,7 +54,7 @@ export default function Product({ product }: ProductProps) {
   return (
     <>
       <Head>
-        <title>{product.name} | Ignite Shop</title>
+        <title>{title}</title>
       </Head>
 
       <ProductContainer>
