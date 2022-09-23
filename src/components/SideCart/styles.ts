@@ -3,13 +3,14 @@ import { styled } from '../../styles'
 export const SideCartContainer = styled('aside', {
   position: 'absolute',
   top: 0,
-  right: '-100vw',
+  right: 0,
   bottom: 0,
   backgroundColor: '$gray800',
   padding: '1.5rem',
   display: 'flex',
+  translate: '100% 0',
   flexDirection: 'column',
-  transition: 'right 0.5s',
+  transition: 'translate 200ms',
 
   strong: {
     fontSize: '$lg',
@@ -17,7 +18,7 @@ export const SideCartContainer = styled('aside', {
   },
 
   '&.slideIn': {
-    right: 0
+    translate: '0 0',
   },
 })
 
