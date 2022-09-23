@@ -25,6 +25,7 @@ export const SideCartHeader = styled('header', {
     button: {
       backgroundColor: 'transparent',
       border: 'none',
+      cursor: 'pointer',
     },
   },
 })

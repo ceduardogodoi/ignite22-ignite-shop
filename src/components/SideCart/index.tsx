@@ -1,5 +1,6 @@
 import { X } from 'phosphor-react'
 import { CartItems } from './components/CartItems';
+import { useSideCartContext } from '../../contexts/SideCartContext'
 import {
   SideCartFooter,
   SideCartHeader,
@@ -7,11 +8,15 @@ import {
 } from './styles';
 
 export function SideCart() {
+  const {
+    closeSideCart: handleCloseSideCart
+  } = useSideCartContext()
+
   return (
     <SideCartContainer>
       <SideCartHeader>
         <div>
-          <button>
+          <button onClick={handleCloseSideCart}>
             <X weight="bold" color="#8d8d99" size={24} />
           </button>
         </div>

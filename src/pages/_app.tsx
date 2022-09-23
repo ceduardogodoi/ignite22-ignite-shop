@@ -4,6 +4,7 @@ import { Container } from '../styles/pages/app'
 
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
+import { SideCartContextProvider } from '../contexts/SideCartContext'
 
 globalStyles()
 
@@ -20,7 +21,9 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <Container>
-      {getLayout(<Component {...pageProps} />)}
+      <SideCartContextProvider>
+        {getLayout(<Component {...pageProps} />)}
+      </SideCartContextProvider>
     </Container>
   )
 }
