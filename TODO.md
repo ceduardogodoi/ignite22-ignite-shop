@@ -4,6 +4,9 @@ Aulas e desafio do Ignite da Rocketseat
 
 ### Todo
 
+- [X] Criar context para abrir e fechar o cart lateral
+- [X] Criar estilização para fazer slide in e out do side cart
+
 - [ ] Codificar estilos da página success ~0.5days #feat @ceduardogodoi 2022-09-23:HH-MM
   - [ ] Imagem de um ou mais produtos dentro do círculo
   - [ ] Alterar texto informativo da compra

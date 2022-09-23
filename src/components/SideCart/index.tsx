@@ -9,11 +9,12 @@ import {
 
 export function SideCart() {
   const {
+    isSideCartOpened,
     closeSideCart: handleCloseSideCart
   } = useSideCartContext()
 
   return (
-    <SideCartContainer>
+    <SideCartContainer className={isSideCartOpened ? 'slideIn' : ''}>
       <SideCartHeader>
         <div>
           <button onClick={handleCloseSideCart}>

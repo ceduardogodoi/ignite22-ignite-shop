@@ -13,7 +13,6 @@ interface DefaultLayoutProps {
 
 export function DefaultLayout({ children }: DefaultLayoutProps) {
   const {
-    isSideCartOpened,
     openSideCart: handleOpenSideCart
   } = useSideCartContext()
 
@@ -38,7 +37,7 @@ export function DefaultLayout({ children }: DefaultLayoutProps) {
 
       {children}
 
-      {isSideCartOpened && <SideCart />}
+      <SideCart />
     </>
   )
 }
