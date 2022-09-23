@@ -1,5 +1,9 @@
 import { X } from 'phosphor-react'
-import { CartSummaryContainer, CloseButtonContainer, SideCartContainer } from './styles';
+import {
+  CartSummaryContainer,
+  CloseButtonContainer,
+  SideCartContainer
+} from './styles';
 
 export function SideCart() {
   return (
@@ -36,8 +40,8 @@ export function SideCart() {
           <span>3 itens</span>
         </div>
         <div>
-          <span>Valor total</span>
-          <span>R$ 270,00</span>
+          <strong>Valor total</strong>
+          <strong>R$ 270,00</strong>
         </div>
 
         <button>Finalizar compra</button>

@@ -36,12 +36,42 @@ export const CartSummaryContainer = styled('div', {
   marginTop: 'auto',
 
   div: {
-    border: '1px solid green',
     display: 'flex',
     justifyContent: 'space-between',
 
-    'span:first-child': {
-      color: 'red',
+    span: {
+      color: '$gray100',
+      fontSize: '$sm',
+
+      '&:last-of-type': {
+        color: '$gray300',
+        fontSize: '$md',
+      },
     },
+
+    strong: {
+      fontSize: '$md',
+
+      '&:last-of-type': {
+        fontSize: '$xl',
+      },
+    },
+
+    '&:last-of-type': {
+      marginTop: '0.438rem',
+    },
+  },
+
+  button: {
+    marginTop: '3.438rem',
+    width: '100%',
+    padding: '1.25rem 2rem',
+    backgroundColor: '$green500',
+    border: 'none',
+    borderRadius: '8px',
+    color: '$white',
+    fontSize: '$md',
+    fontWeight: 700,
+    cursor: 'pointer',
   },
 })
