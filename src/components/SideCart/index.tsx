@@ -1,4 +1,5 @@
 import { X } from 'phosphor-react'
+import { CartItems } from './components/CartItems';
 import {
   SideCartFooter,
   SideCartHeader,
@@ -18,23 +19,7 @@ export function SideCart() {
         <strong>Sacola de compras</strong>
       </SideCartHeader>
 
-      <ul>
-        {Array(3).fill('').map((_, index) => {
-          return (
-            <li key={index}>
-              <div>
-                camiseta
-              </div>
-              <div>
-                <span>Camiseta Beyond the Limits</span>
-                <span>R$ 79,90</span>
-
-                <button>Remover</button>
-              </div>
-            </li>
-          )
-        })}
-      </ul>
+      <CartItems />
 
       <SideCartFooter>
         <div>

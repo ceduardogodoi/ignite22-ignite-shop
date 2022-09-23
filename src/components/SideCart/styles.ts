@@ -14,11 +14,6 @@ export const SideCartContainer = styled('aside', {
     fontSize: '$lg',
     color: '$gray100',
   },
-
-  ul: {
-    marginTop: '2rem',
-    listStyle: 'none',
-  },
 })
 
 export const SideCartHeader = styled('header', {
