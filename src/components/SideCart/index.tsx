@@ -1,20 +1,22 @@
 import { X } from 'phosphor-react'
 import {
-  CartSummaryContainer,
-  CloseButtonContainer,
+  SideCartFooter,
+  SideCartHeader,
   SideCartContainer
 } from './styles';
 
 export function SideCart() {
   return (
     <SideCartContainer>
-      <CloseButtonContainer>
-        <button>
-          <X weight="bold" color="#8d8d99" size={24} />
-        </button>
-      </CloseButtonContainer>
+      <SideCartHeader>
+        <div>
+          <button>
+            <X weight="bold" color="#8d8d99" size={24} />
+          </button>
+        </div>
 
-      <strong>Sacola de compras</strong>
+        <strong>Sacola de compras</strong>
+      </SideCartHeader>
 
       <ul>
         {Array(3).fill('').map((_, index) => {
@@ -34,7 +36,7 @@ export function SideCart() {
         })}
       </ul>
 
-      <CartSummaryContainer>
+      <SideCartFooter>
         <div>
           <span>Quantidade</span>
           <span>3 itens</span>
@@ -45,7 +47,7 @@ export function SideCart() {
         </div>
 
         <button>Finalizar compra</button>
-      </CartSummaryContainer>
+      </SideCartFooter>
     </SideCartContainer>
   )
 }

@@ -21,18 +21,20 @@ export const SideCartContainer = styled('aside', {
   },
 })
 
-export const CloseButtonContainer = styled('div', {
-  display: 'flex',
-  justifyContent: 'end',
-  marginBottom: '1.5rem',
+export const SideCartHeader = styled('header', {
+  div: {
+    display: 'flex',
+    justifyContent: 'end',
+    marginBottom: '1.5rem',
 
-  button: {
-    backgroundColor: 'transparent',
-    border: 'none',
+    button: {
+      backgroundColor: 'transparent',
+      border: 'none',
+    },
   },
 })
 
-export const CartSummaryContainer = styled('div', {
+export const SideCartFooter = styled('footer', {
   marginTop: 'auto',
 
   div: {
