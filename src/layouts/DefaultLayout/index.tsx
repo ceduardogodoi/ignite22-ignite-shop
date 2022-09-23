@@ -1,6 +1,7 @@
 import { ReactNode } from 'react'
 import Image from 'next/future/image';
 import { Handbag } from 'phosphor-react'
+import { SideCart } from '../../components/SideCart';
 import { cartWithOneItem } from '../../fixtures'
 import logoImg from '../../assets/logo.svg'
 import { Button, Header } from './styles';
@@ -27,6 +28,8 @@ export function DefaultLayout({ children }: DefaultLayoutProps) {
       </Header>
 
       {children}
+
+      <SideCart />
     </>
   )
 }

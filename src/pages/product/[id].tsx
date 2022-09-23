@@ -1,10 +1,11 @@
-import { useState } from 'react'
+import { ReactElement, useState } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Image from 'next/future/image'
-import Stripe from 'stripe'
 import axios from 'axios'
+import Stripe from 'stripe'
+import { DefaultLayout } from '../../layouts/DefaultLayout'
 import { stripe } from '../../lib/stripe'
 import {
   ImageContainer,
@@ -101,6 +102,14 @@ export const getStaticPaths: GetStaticPaths<{ id: string }> = async () => {
     // 'blocking' => bloqueará a página até que a renderização seja finalizada
     fallback: true,
   }
+}
+
+Product.getLayout = (page: ReactElement) => {
+  return (
+    <DefaultLayout>
+      {page}
+    </DefaultLayout>
+  )
 }
 
 export const getStaticProps: GetStaticProps<ProductProps, { id: string }> = async ({ params }) => {

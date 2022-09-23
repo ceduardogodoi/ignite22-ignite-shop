@@ -1,19 +1,26 @@
-import { AppProps } from 'next/app'
-import { SideCart } from '../components/SideCart'
+import { ReactElement, ReactNode } from 'react'
 import { globalStyles } from '../styles/global'
 import { Container } from '../styles/pages/app'
-import { DefaultLayout } from '../layouts/DefaultLayout'
+
+import type { NextPage } from 'next'
+import type { AppProps } from 'next/app'
 
 globalStyles()
 
-export default function App({ Component, pageProps }: AppProps) {
+export type NextPageWithLayout<P = {}, IP = P> = NextPage<P, IP> & {
+  getLayout?: (page: ReactElement) => ReactNode
+}
+
+type AppPropsWithLayout = AppProps & {
+  Component: NextPageWithLayout
+}
+
+export default function App({ Component, pageProps }: AppPropsWithLayout) {
+  const getLayout = Component.getLayout ?? ((page) => page)
+
   return (
     <Container>
-      <DefaultLayout>
-        <Component {...pageProps} />
-      </DefaultLayout>
-
-      <SideCart />
+      {getLayout(<Component {...pageProps} />)}
     </Container>
   )
 }

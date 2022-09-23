@@ -1,8 +1,10 @@
+import { ReactElement } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
 import Image from 'next/future/image';
 import Stripe from 'stripe';
+import { SuccessLayout } from '../layouts/SuccessLayout';
 import { stripe } from '../lib/stripe';
 import { ImageContainer, SuccessContainer } from '../styles/pages/success';
 
@@ -40,6 +42,14 @@ export default function Success({ customerName, product }: SuccessProps) {
         </Link>
       </SuccessContainer>
     </>
+  )
+}
+
+Success.getLayout = (page: ReactElement) => {
+  return (
+    <SuccessLayout>
+      {page}
+    </SuccessLayout>
   )
 }
 

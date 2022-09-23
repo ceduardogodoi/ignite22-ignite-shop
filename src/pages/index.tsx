@@ -1,3 +1,4 @@
+import { ReactElement } from 'react'
 import { GetStaticProps } from 'next'
 import Head from 'next/head'
 import Link from 'next/link'
@@ -5,6 +6,7 @@ import Image from 'next/future/image'
 import Stripe from 'stripe'
 import { Handbag } from 'phosphor-react'
 import { useKeenSlider } from 'keen-slider/react'
+import { DefaultLayout } from '../layouts/DefaultLayout'
 import { stripe } from '../lib/stripe'
 import { Button, HomeContainer, Product } from '../styles/pages/home'
 
@@ -61,6 +63,14 @@ export default function Home({ products }: HomeProps) {
         })}
       </HomeContainer>
     </>
+  )
+}
+
+Home.getLayout = (page: ReactElement) => {
+  return (
+    <DefaultLayout>
+      {page}
+    </DefaultLayout>
   )
 }
 
