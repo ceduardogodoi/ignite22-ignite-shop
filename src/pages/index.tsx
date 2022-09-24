@@ -7,24 +7,20 @@ import Stripe from 'stripe'
 import { Handbag } from 'phosphor-react'
 import { useKeenSlider } from 'keen-slider/react'
 import { useCartContext } from '../contexts/CartContext'
+import { Product } from '../contexts/CartContext/Cart.model'
 import { DefaultLayout } from '../layouts/DefaultLayout'
 import { stripe } from '../lib/stripe'
-import { Button, HomeContainer, Product } from '../styles/pages/home'
+import { Button, HomeContainer, ProductContainer } from '../styles/pages/home'
 
 import 'keen-slider/keen-slider.min.css'
 
 interface HomeProps {
-  products: {
-    id: string;
-    name: string;
-    imageUrl: string;
-    price: string;
-  }[]
+  products: Product[]
 }
 
 export default function Home({ products }: HomeProps) {
-  const cartContext = useCartContext()
-  console.log(cartContext)
+  const { products: cartProducts, addProductToCart } = useCartContext()
+  console.log(cartProducts)
 
   const [sliderRef] = useKeenSlider({
     slides: {
@@ -32,6 +28,10 @@ export default function Home({ products }: HomeProps) {
       spacing: 48,
     },
   })
+
+  function handleAddProductToCart(product: Product) {
+    addProductToCart(product)
+  }
 
   return (
     <>
@@ -42,27 +42,27 @@ export default function Home({ products }: HomeProps) {
       <HomeContainer ref={sliderRef} className="keen-slider">
         {products.map(product => {
           return (
-            <Link
+            <ProductContainer
               key={product.id}
-              href={`/product/${product.id}`}
-              prefetch={false}
+              className="keen-slider__slide"
             >
-              <Product
-                className="keen-slider__slide"
+              <Link
+                href={`/product/${product.id}`}
+                prefetch={false}
               >
                 <Image src={product.imageUrl} width={520} height={480} alt="" />
+              </Link>
 
-                <footer>
-                  <div>
-                    <strong>{product.name}</strong>
-                    <span>{product.price}</span>
-                  </div>
-                  <Button>
-                    <Handbag size={32} color="#fff" weight="bold" />
-                  </Button>
-                </footer>
-              </Product>
-            </Link>
+              <footer>
+                <div>
+                  <strong>{product.name}</strong>
+                  <span>{product.price}</span>
+                </div>
+                <Button onClick={() => handleAddProductToCart(product)}>
+                  <Handbag size={32} color="#fff" weight="bold" />
+                </Button>
+              </footer>
+            </ProductContainer>
           )
         })}
       </HomeContainer>
