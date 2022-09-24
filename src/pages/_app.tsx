@@ -1,10 +1,11 @@
 import { ReactElement, ReactNode } from 'react'
+import { CartContextProvider } from '../contexts/CartContext'
+import { SideCartContextProvider } from '../contexts/SideCartContext'
 import { globalStyles } from '../styles/global'
 import { Container } from '../styles/pages/app'
 
 import type { NextPage } from 'next'
 import type { AppProps } from 'next/app'
-import { SideCartContextProvider } from '../contexts/SideCartContext'
 
 globalStyles()
 
@@ -21,9 +22,11 @@ export default function App({ Component, pageProps }: AppPropsWithLayout) {
 
   return (
     <Container>
-      <SideCartContextProvider>
-        {getLayout(<Component {...pageProps} />)}
-      </SideCartContextProvider>
+      <CartContextProvider>
+        <SideCartContextProvider>
+          {getLayout(<Component {...pageProps} />)}
+        </SideCartContextProvider>
+      </CartContextProvider>
     </Container>
   )
 }

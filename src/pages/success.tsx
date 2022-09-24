@@ -31,13 +31,9 @@ export default function Success({ customerName, product }: SuccessProps) {
 
       <SuccessContainer>
         <ImagesContainer>
-          {Array(3).fill('').map((_, index) => {
-            return (
-              <ImageBackground key={index}>
-                <Image src={product.imageUrl} width={120} height={110} alt="" />
-              </ImageBackground>
-            )
-          })}
+          <ImageBackground>
+            <Image src={product.imageUrl} width={120} height={110} alt="" />
+          </ImageBackground>
         </ImagesContainer>
 
         <h1>Compra efetuada</h1>

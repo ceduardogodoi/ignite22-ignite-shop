@@ -6,6 +6,7 @@ import Image from 'next/future/image'
 import Stripe from 'stripe'
 import { Handbag } from 'phosphor-react'
 import { useKeenSlider } from 'keen-slider/react'
+import { useCartContext } from '../contexts/CartContext'
 import { DefaultLayout } from '../layouts/DefaultLayout'
 import { stripe } from '../lib/stripe'
 import { Button, HomeContainer, Product } from '../styles/pages/home'
@@ -22,6 +23,9 @@ interface HomeProps {
 }
 
 export default function Home({ products }: HomeProps) {
+  const cartContext = useCartContext()
+  console.log(cartContext)
+
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 2,
