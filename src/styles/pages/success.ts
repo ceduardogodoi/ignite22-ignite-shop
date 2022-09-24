@@ -18,7 +18,7 @@ export const SuccessContainer = styled('main', {
   p: {
     fontSize: '$xl',
     color: '$gray300',
-    maxWidth: 560,
+    maxWidth: '36.875rem',
     textAlign: 'center',
     marginTop: '2rem',
     lineHeight: 1.4,

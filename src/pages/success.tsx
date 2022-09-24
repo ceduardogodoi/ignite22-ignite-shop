@@ -43,8 +43,8 @@ export default function Success({ customerName, product }: SuccessProps) {
         <h1>Compra efetuada</h1>
 
         <p>
-          Uhuul <strong>{customerName}</strong>, sua camiseta{' '}
-          <strong>{product.name}</strong> já está a caminho da sua casa.
+          Uhuul <strong>{customerName}</strong>, sua compra de {3} camisetas
+          já está a caminho da sua casa.
         </p>
 
         <Link href="/">
