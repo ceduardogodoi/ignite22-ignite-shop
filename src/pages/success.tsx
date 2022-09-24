@@ -6,7 +6,11 @@ import Image from 'next/future/image';
 import Stripe from 'stripe';
 import { SuccessLayout } from '../layouts/SuccessLayout';
 import { stripe } from '../lib/stripe';
-import { ImageContainer, SuccessContainer } from '../styles/pages/success';
+import {
+  ImageBackground,
+  ImagesContainer,
+  SuccessContainer
+} from '../styles/pages/success';
 
 interface SuccessProps {
   customerName: string;
@@ -26,11 +30,17 @@ export default function Success({ customerName, product }: SuccessProps) {
       </Head>
 
       <SuccessContainer>
-        <h1>Compra efetuada</h1>
+        <ImagesContainer>
+          {Array(3).fill('').map((_, index) => {
+            return (
+              <ImageBackground key={index}>
+                <Image src={product.imageUrl} width={120} height={110} alt="" />
+              </ImageBackground>
+            )
+          })}
+        </ImagesContainer>
 
-        <ImageContainer>
-          <Image src={product.imageUrl} width={120} height={110} alt="" />
-        </ImageContainer>
+        <h1>Compra efetuada</h1>
 
         <p>
           Uhuul <strong>{customerName}</strong>, sua camiseta{' '}
