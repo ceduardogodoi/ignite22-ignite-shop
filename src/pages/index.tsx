@@ -19,8 +19,7 @@ interface HomeProps {
 }
 
 export default function Home({ products }: HomeProps) {
-  const { products: cartProducts, addProductToCart } = useCartContext()
-  console.log(cartProducts)
+  const { addProductToCart } = useCartContext()
 
   const [sliderRef] = useKeenSlider({
     slides: {
