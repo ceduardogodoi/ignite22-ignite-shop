@@ -12,5 +12,5 @@ export interface CartProduct extends Product {
 export interface CartState {
   products: CartProduct[];
   quantity: number;
-  total: 0;
+  total: number;
 }
