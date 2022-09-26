@@ -40,6 +40,7 @@ export const CartItemsContainer = styled('ul', {
         color: '$green500',
         fontSize: '$sm',
         fontWeight: 700,
+        cursor: 'pointer',
       },
     },
   },

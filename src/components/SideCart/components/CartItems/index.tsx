@@ -4,7 +4,11 @@ import { currencyFormatter } from '../../../../utils/formatter'
 import { CartItemsContainer } from './styles'
 
 export function CartItems() {
-  const { products } = useCartContext()
+  const { products, removeProductToCart } = useCartContext()
+
+  function handleRemoveProductFromCart(productId: string) {
+    removeProductToCart(productId)
+  }
 
   return (
     <CartItemsContainer>
@@ -19,7 +23,7 @@ export function CartItems() {
               <span>{product.name}</span>
               <strong>{currencyFormatter().format(product.price)}</strong>
 
-              <button>Remover</button>
+              <button onClick={() => handleRemoveProductFromCart(product.id)}>Remover</button>
             </div>
           </li>
         )

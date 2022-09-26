@@ -4,11 +4,16 @@ import {
   useContext,
   useReducer
 } from 'react'
-import cartReducer, { initialState, addToCartAction } from './cartReducer'
+import cartReducer, {
+  initialState,
+  addToCartAction,
+  removeFromCartAction
+} from './cartReducer'
 import { CartState, Product } from './Cart.model'
 
 interface CartContextType extends CartState {
-  addProductToCart(product: Product): void
+  addProductToCart(product: Product): void;
+  removeProductToCart(productId: string): void;
 }
 
 const CartContext = createContext({} as CartContextType)
@@ -24,12 +29,17 @@ export function CartContextProvider({ children }: CartContextProviderProps) {
     dispatch(addToCartAction(product))
   }
 
+  function removeProductToCart(productId: string) {
+    dispatch(removeFromCartAction(productId))
+  }
+
   return (
     <CartContext.Provider value={{
       products: state.products,
       quantity: state.quantity,
       total: state.total,
       addProductToCart,
+      removeProductToCart,
     }}>
       {children}
     </CartContext.Provider>
