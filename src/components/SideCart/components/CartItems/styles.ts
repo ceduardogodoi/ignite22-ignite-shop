@@ -30,6 +30,10 @@ export const CartItemsContainer = styled('ul', {
       strong: {
         fontSize: '$md',
         color: '$gray100',
+
+        '& + span' : {
+          marginTop: '0.5rem',
+        },
       },
 
       button: {

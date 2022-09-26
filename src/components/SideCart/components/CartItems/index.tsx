@@ -22,6 +22,7 @@ export function CartItems() {
             <div>
               <span>{product.name}</span>
               <strong>{currencyFormatter().format(product.price)}</strong>
+              <span>Quantidade: {product.quantity}</span>
 
               <button onClick={() => handleRemoveProductFromCart(product.id)}>Remover</button>
             </div>
