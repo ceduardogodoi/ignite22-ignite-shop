@@ -35,18 +35,18 @@ export default function cartReducer(state: CartState, action: CartAction): CartS
       const index = state.products.findIndex(cartProduct => cartProduct.id === action.payload.id)
 
       if (index > -1) {
-        const product: CartProduct = {
-          ...action.payload,
-          quantity: state.products[index].quantity + 1
-        }
+        const product = state.products[index]
+        const copy = { ...product }
+        copy.quantity += 1
 
-        state.products.splice(index, 1, product)
+        const products = [...state.products]
+        products.splice(index, 1, copy)
 
         return {
           ...state,
+          products,
           quantity: state.quantity + 1,
-          products: [...state.products],
-          total: state.total += product.price,
+          total: state.total + product.price,
         }
       }
 
@@ -56,23 +56,22 @@ export default function cartReducer(state: CartState, action: CartAction): CartS
       }
       return {
         ...state,
-        quantity: state.quantity + product.quantity,
         products: [...state.products, product],
-        total: state.total += product.price,
+        quantity: state.quantity + 1,
+        total: state.total + product.price,
       }
     }
 
     case CartActions.REMOVE: {
       const index = state.products.findIndex(cartProduct => cartProduct.id === action.payload)
       const product = state.products[index]
-
-      state.products.splice(index, 1)
+      const products = state.products.filter((_, cartIndex) => index !== cartIndex)
 
       return {
         ...state,
-        products: [...state.products],
-        quantity: state.quantity -= product.quantity,
-        total: state.total -= product.quantity * product.price
+        products,
+        quantity: state.quantity - product.quantity,
+        total: state.total - product.quantity * product.price
       }
     }
 
