@@ -20,8 +20,6 @@ interface CartContextProviderProps {
 export function CartContextProvider({ children }: CartContextProviderProps) {
   const [state, dispatch] = useReducer(cartReducer, initialState)
 
-  // console.log(state)
-
   function addProductToCart(product: Product) {
     dispatch(addToCartAction(product))
   }

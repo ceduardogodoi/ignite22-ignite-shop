@@ -28,12 +28,12 @@ export default function cartReducer(state: CartState, action: CartAction): CartS
       const index = state.products.findIndex(cartProduct => cartProduct.id === action.payload.id)
 
       if (index > -1) {
-        const newProduct: Product = {
+        const product: Product = {
           ...action.payload,
-          quantity: action.payload.quantity + 1
+          quantity: state.products[index].quantity + 1
         }
 
-        state.products.splice(index, 1, newProduct)
+        state.products.splice(index, 1, product)
 
         return {
           ...state,
@@ -42,11 +42,14 @@ export default function cartReducer(state: CartState, action: CartAction): CartS
         }
       }
 
-      action.payload.quantity = 1
+      const product: Product = {
+        ...action.payload,
+        quantity: 1
+      }
       return {
         ...state,
-        quantity: state.quantity + action.payload.quantity,
-        products: [...state.products, action.payload]
+        quantity: state.quantity + product.quantity,
+        products: [...state.products, product]
       }
     default:
       return state
