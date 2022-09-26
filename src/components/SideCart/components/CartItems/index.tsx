@@ -1,11 +1,14 @@
 import Image from 'next/future/image'
-import { cartWithOneItem } from '../../../../fixtures'
+import { useCartContext } from '../../../../contexts/CartContext'
+import { currencyFormatter } from '../../../../utils/formatter'
 import { CartItemsContainer } from './styles'
 
 export function CartItems() {
+  const { products } = useCartContext()
+
   return (
     <CartItemsContainer>
-      {cartWithOneItem.map(product => {
+      {products.map(product => {
         return (
           <li key={product.id}>
             <div>
@@ -14,7 +17,7 @@ export function CartItems() {
 
             <div>
               <span>{product.name}</span>
-              <strong>{product.price}</strong>
+              <strong>{currencyFormatter().format(product.price)}</strong>
 
               <button>Remover</button>
             </div>

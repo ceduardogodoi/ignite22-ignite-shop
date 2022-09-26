@@ -38,7 +38,8 @@ export default function cartReducer(state: CartState, action: CartAction): CartS
         return {
           ...state,
           quantity: state.quantity + 1,
-          products: [...state.products]
+          products: [...state.products],
+          total: state.total += product.price,
         }
       }
 
@@ -50,7 +51,7 @@ export default function cartReducer(state: CartState, action: CartAction): CartS
         ...state,
         quantity: state.quantity + product.quantity,
         products: [...state.products, product],
-        total: state.total,
+        total: state.total += product.price,
       }
     default:
       return state

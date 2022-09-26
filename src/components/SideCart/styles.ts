@@ -11,6 +11,7 @@ export const SideCartContainer = styled('aside', {
   translate: '100% 0',
   flexDirection: 'column',
   transition: 'translate 200ms ease-in-out',
+  minWidth: 420,
 
   strong: {
     fontSize: '$lg',

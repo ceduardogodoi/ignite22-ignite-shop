@@ -1,6 +1,8 @@
 import { X } from 'phosphor-react'
 import { CartItems } from './components/CartItems';
 import { useSideCartContext } from '../../contexts/SideCartContext'
+import { useCartContext } from '../../contexts/CartContext'
+import { currencyFormatter } from '../../utils/formatter'
 import {
   SideCartFooter,
   SideCartHeader,
@@ -12,6 +14,7 @@ export function SideCart() {
     isSideCartOpened,
     closeSideCart: handleCloseSideCart
   } = useSideCartContext()
+  const { quantity, total } = useCartContext()
 
   return (
     <SideCartContainer className={isSideCartOpened ? 'slideIn' : ''}>
@@ -30,11 +33,11 @@ export function SideCart() {
       <SideCartFooter>
         <div>
           <span>Quantidade</span>
-          <span>3 itens</span>
+          <span>{quantity} itens</span>
         </div>
         <div>
           <strong>Valor total</strong>
-          <strong>R$ 270,00</strong>
+          <strong>{currencyFormatter().format(total)}</strong>
         </div>
 
         <button>Finalizar compra</button>

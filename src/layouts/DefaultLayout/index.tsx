@@ -3,7 +3,7 @@ import Image from 'next/future/image';
 import { Handbag } from 'phosphor-react'
 import { SideCart } from '../../components/SideCart';
 import { useSideCartContext } from '../../contexts/SideCartContext'
-import { cartWithOneItem } from '../../fixtures'
+import { useCartContext } from '../../contexts/CartContext'
 import logoImg from '../../assets/logo.svg'
 import { Button, Header } from './styles';
 
@@ -15,6 +15,7 @@ export function DefaultLayout({ children }: DefaultLayoutProps) {
   const {
     openSideCart: handleOpenSideCart
   } = useSideCartContext()
+  const { quantity } = useCartContext()
 
   return (
     <>
@@ -22,14 +23,14 @@ export function DefaultLayout({ children }: DefaultLayoutProps) {
         <Image src={logoImg} alt="" />
 
         <Button
-          items={cartWithOneItem.length > 0}
+          items={quantity > 0}
           onClick={handleOpenSideCart}
         >
           <Handbag size={24} weight="bold" />
 
-          {cartWithOneItem.length > 0 && (
+          {quantity > 0 && (
             <div>
-              <span>{cartWithOneItem.length}</span>
+              <span>{quantity}</span>
             </div>
           )}
         </Button>
