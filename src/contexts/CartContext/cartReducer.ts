@@ -1,7 +1,7 @@
-import { CartState, Product } from './Cart.model'
+import { CartProduct, CartState, Product } from './Cart.model'
 
 enum CartActions {
-  ADD = 'ADD',
+  ADD = 'cart/add',
 }
 
 interface CartAction {
@@ -28,7 +28,7 @@ export default function cartReducer(state: CartState, action: CartAction): CartS
       const index = state.products.findIndex(cartProduct => cartProduct.id === action.payload.id)
 
       if (index > -1) {
-        const product: Product = {
+        const product: CartProduct = {
           ...action.payload,
           quantity: state.products[index].quantity + 1
         }
@@ -42,14 +42,15 @@ export default function cartReducer(state: CartState, action: CartAction): CartS
         }
       }
 
-      const product: Product = {
+      const product: CartProduct = {
         ...action.payload,
         quantity: 1
       }
       return {
         ...state,
         quantity: state.quantity + product.quantity,
-        products: [...state.products, product]
+        products: [...state.products, product],
+        total: state.total,
       }
     default:
       return state

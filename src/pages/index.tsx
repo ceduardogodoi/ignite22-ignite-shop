@@ -7,9 +7,10 @@ import Stripe from 'stripe'
 import { Handbag } from 'phosphor-react'
 import { useKeenSlider } from 'keen-slider/react'
 import { useCartContext } from '../contexts/CartContext'
-import { Product } from '../contexts/CartContext/Cart.model'
 import { DefaultLayout } from '../layouts/DefaultLayout'
 import { stripe } from '../lib/stripe'
+import { currencyFormatter } from '../utils/formatter'
+import { Product } from '../contexts/CartContext/Cart.model'
 import { Button, HomeContainer, ProductContainer } from '../styles/pages/home'
 
 import 'keen-slider/keen-slider.min.css'
@@ -55,7 +56,7 @@ export default function Home({ products }: HomeProps) {
               <footer>
                 <div>
                   <strong>{product.name}</strong>
-                  <span>{product.price}</span>
+                  <span>{currencyFormatter().format(product.price)}</span>
                 </div>
                 <Button onClick={() => handleAddProductToCart(product)}>
                   <Handbag size={32} color="#fff" weight="bold" />
@@ -77,7 +78,7 @@ Home.getLayout = (page: ReactElement) => {
   )
 }
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps<HomeProps> = async () => {
   const response = await stripe.products.list({
     expand: ['data.default_price']
   })
@@ -90,11 +91,7 @@ export const getStaticProps: GetStaticProps = async () => {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
-      price: new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      })
-        .format(price.unit_amount / 100)
+      price: price.unit_amount / 100
     }
   })
 
