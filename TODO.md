@@ -15,4 +15,5 @@ Aulas e desafio do Ignite da Rocketseat
 - [x] Desenvolver cart exibindo informações dinâmicas
 - [x] Página de detalhes do produto deve adicionar o produto ao carrinho
 - [X] Permitir que seja possível comprar mais de um produto
-- [ ] Exibir imagens dos produtos comprados com a quantidade na página de sucesso
+- [X] Exibir imagens dos produtos comprados com a quantidade na página de sucesso
+- [ ] Exibir contador da quantidade dos produtos na página de sucesso
