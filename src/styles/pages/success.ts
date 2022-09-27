@@ -47,6 +47,7 @@ export const ImagesContainer = styled('div', {
 })
 
 export const ImageBackground = styled('div', {
+  position: 'relative',
   width: '140px',
   height: '140px',
   background: 'linear-gradient(180deg, #1ea483 0%, #7465d4 100%)',
@@ -59,5 +60,21 @@ export const ImageBackground = styled('div', {
 
   img: {
     objectFit: 'cover',
+  },
+
+  span: {
+    width: 24,
+    height: 24,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+    bottom: '-15px',
+    left: '10px',
+    background: '$green500',
+    borderRadius: '50%',
+    border: '3px solid $gray900',
+    boxSizing: 'initial',
+    fontWeight: 'bold',
   },
 })

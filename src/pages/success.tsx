@@ -30,9 +30,12 @@ export default function Success({ customerName, quantity, imagesUrls }: SuccessP
       <SuccessContainer>
         <ImagesContainer>
           {imagesUrls.map(imageUrl => (
-            <ImageBackground key={imageUrl}>
-              <Image src={imageUrl} width={120} height={110} alt="" />
-            </ImageBackground>
+            <>
+              <ImageBackground key={imageUrl}>
+                <Image src={imageUrl} width={120} height={110} alt="" />
+                <span>3</span>
+              </ImageBackground>
+            </>
           ))}
         </ImagesContainer>
 
