@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import { X } from 'phosphor-react'
+import axios from 'axios';
 import { CartItems } from './components/CartItems';
 import { useSideCartContext } from '../../contexts/SideCartContext'
 import { useCartContext } from '../../contexts/CartContext'
@@ -14,7 +16,28 @@ export function SideCart() {
     isSideCartOpened,
     closeSideCart: handleCloseSideCart
   } = useSideCartContext()
-  const { quantity, total } = useCartContext()
+  const { quantity, total, products } = useCartContext()
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
+
+  async function handleFinishOrder() {
+    try {
+      setIsCreatingCheckoutSession(true)
+      const lineItems = products.map(product => {
+        return {
+          price: product.defaultPriceId,
+          quantity: product.quantity
+        }
+      })
+
+      const response = await axios.post<{ checkoutUrl: string }>('/api/checkout', lineItems)
+      const { checkoutUrl } = response.data
+      window.location.href = checkoutUrl
+    } catch (error) {
+      setIsCreatingCheckoutSession(false)
+
+      console.error('Falha ao redirecionar ao checkout', error)
+    }
+  }
 
   return (
     <SideCartContainer className={isSideCartOpened ? 'slideIn' : ''}>
@@ -40,7 +63,12 @@ export function SideCart() {
           <strong>{currencyFormatter().format(total)}</strong>
         </div>
 
-        <button>Finalizar compra</button>
+        <button
+          onClick={handleFinishOrder}
+          disabled={isCreatingCheckoutSession}
+        >
+          Finalizar compra
+        </button>
       </SideCartFooter>
     </SideCartContainer>
   )

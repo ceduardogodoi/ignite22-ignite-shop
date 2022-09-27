@@ -1,11 +1,12 @@
-import { ReactElement, useState } from 'react'
+import { ReactElement } from 'react'
 import { GetStaticPaths, GetStaticProps } from 'next'
 import { useRouter } from 'next/router'
 import Head from 'next/head'
 import Image from 'next/future/image'
-import axios from 'axios'
 import Stripe from 'stripe'
 import { DefaultLayout } from '../../layouts/DefaultLayout'
+import { useCartContext } from '../../contexts/CartContext'
+import { currencyFormatter } from '../../utils/formatter'
 import { stripe } from '../../lib/stripe'
 import {
   ImageContainer,
@@ -18,15 +19,15 @@ interface ProductProps {
     id: string;
     name: string;
     imageUrl: string;
-    price: string;
+    price: number;
     description: string;
     defaultPriceId: string;
   }
 }
 
 export default function Product({ product }: ProductProps) {
-  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false)
-  // alternativa mais recomendada
+  const { addProductToCart } = useCartContext()
+
   const { isFallback } = useRouter()
 
   if (isFallback) {
@@ -35,21 +36,8 @@ export default function Product({ product }: ProductProps) {
 
   const title = `${product.name} | Ignite Shop`
 
-  async function handleBuyProduct() {
-    try {
-      setIsCreatingCheckoutSession(true)
-      const response = await axios.post<{ checkoutUrl: string }>('/api/checkout', {
-        priceId: product.defaultPriceId
-      })
-
-      const { checkoutUrl } = response.data
-
-      window.location.href = checkoutUrl
-    } catch (error) {
-      setIsCreatingCheckoutSession(false)
-
-      alert('Falha ao redirecionar ao checkout!')
-    }
+  function handleAddProduct() {
+    addProductToCart(product)
   }
 
   return (
@@ -65,15 +53,14 @@ export default function Product({ product }: ProductProps) {
 
         <ProductDetails>
           <h1>{product.name}</h1>
-          <span>{product.price}</span>
+          <span>{currencyFormatter().format(product.price)}</span>
 
           <p>{product.description}</p>
 
           <button
-            onClick={handleBuyProduct}
-            disabled={isCreatingCheckoutSession}
+            onClick={handleAddProduct}
           >
-            Comprar agora
+            Colocar na sacola
           </button>
         </ProductDetails>
       </ProductContainer>
@@ -127,13 +114,9 @@ export const getStaticProps: GetStaticProps<ProductProps, { id: string }> = asyn
         id: product.id,
         name: product.name,
         imageUrl: product.images[0],
-        price: new Intl.NumberFormat('pt-BR', {
-          style: 'currency',
-          currency: 'BRL'
-        })
-          .format(price.unit_amount / 100),
+        price: price.unit_amount / 100,
         description: product.description,
-        defaultPriceId: price.id
+        defaultPriceId: price.id,
       }
     },
     revalidate: 60 * 60 * 1, // 1 hour
