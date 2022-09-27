@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import { ReactElement, Fragment } from 'react';
 import { GetServerSideProps } from 'next';
 import Head from 'next/head';
 import Link from 'next/link';
@@ -15,10 +15,14 @@ import {
 interface SuccessProps {
   customerName: string;
   quantity: number;
-  imagesUrls: string[];
+  products: {
+    id: string;
+    quantity: number;
+    image: string;
+  }[];
 }
 
-export default function Success({ customerName, quantity, imagesUrls }: SuccessProps) {
+export default function Success({ customerName, quantity, products }: SuccessProps) {
   return (
     <>
       <Head>
@@ -29,13 +33,13 @@ export default function Success({ customerName, quantity, imagesUrls }: SuccessP
 
       <SuccessContainer>
         <ImagesContainer>
-          {imagesUrls.map(imageUrl => (
-            <>
-              <ImageBackground key={imageUrl}>
-                <Image src={imageUrl} width={120} height={110} alt="" />
-                <span>3</span>
+          {products.map(product => (
+            <Fragment key={product.id}>
+              <ImageBackground>
+                <Image src={product.image} width={120} height={110} alt="" />
+                <span>{product.quantity}</span>
               </ImageBackground>
-            </>
+            </Fragment>
           ))}
         </ImagesContainer>
 
@@ -85,16 +89,20 @@ export const getServerSideProps: GetServerSideProps<SuccessProps> = async ({ que
     return accumulator
   }, 0)
 
-  const imagesUrls = session.line_items?.data.map(item => {
+  const products = session.line_items?.data.map(item => {
     const product = item.price.product as Stripe.Product
-    return product.images[0]
+    return {
+      id: product.id,
+      quantity: item.quantity,
+      image: product.images[0]
+    }
   })
 
   return {
     props: {
       customerName,
       quantity,
-      imagesUrls,
+      products,
     },
   }
 }
