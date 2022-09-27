@@ -12,4 +12,5 @@ Aulas e desafio do Ignite da Rocketseat
   - [x] Alterar texto informativo da compra
     - [x] Alterar nome da camiseta para quantidade de camisetas conforme [Figma](<https://www.figma.com/file/8D9ZFJk3JMQMJ1MnbMPiT2/Ignite-Shop-2.0-(Copy)?node-id=418%3A62>).
 - [X] Desenvolver comportamento de adicionar quantidade de um produto que já foi adicionado ao carrinho
-- [ ] Desenvolver cart exibindo informações dinâmicas
+- [X] Desenvolver cart exibindo informações dinâmicas
+- [ ] Página de detalhes do produto deve adicionar o produto ao carrinho
